@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+   body {
+        font-family: 'Poppins', sans-serif;
+        background: url('/static/chanakya-bg-1.png') no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+    }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    
+        .sidebar h2 {
+            color: black;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+    
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        .sidebar li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+    
+        .sidebar li a {
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+    
+        .sidebar li a:hover {
+            color: #ef771b;
+        }
+    
+        .sidebar li a .icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+    
+        /* Profile Section in Sidebar */
+        .profile-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ef771b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+            margin-bottom: 10px;
+        }
+    
+        .profile-section h4 {
+            color: white;
+            margin: 0;
+        }
+    
+        /* Event Section */
+        .container {
+            margin-left: 100px;
+            padding-top: 30px;
+            width: calc(100% - 260px);
+        }
+    
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    
+        .search-container input,
+        .search-container select,
+        .search-container button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid  black;
+        }
+    
+        .search-container button {
+            background-color: #ef771b;
+            color: black;
+            border: none;
+        }
+    
+        .search-container button:hover {
+            background-color: #c55e16;
+        }
+    
+        .search-container h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+    
+        /* Chat Box */
+        .chat-box-container {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            height: 50px;
+            background-color: #ef771b;
+            color: black;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+    
+        .chat-box-container .chat-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color:black;
+            color: #ef771b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .chat-box-expanded {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            width: 350px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+        }
+    
+        .chat-box-expanded.active {
+            display: flex;
+        }
+    
+        .chat-box-expanded h4 {
+            color: #ef771b;
+            margin-bottom: 10px;
+        }
+    
+        .chat-box-expanded .chat-box {
+            flex: 1;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+    
+        .chat-box-expanded .input-container {
+            display: flex;
+            gap: 10px;
+        }
+    
+        .chat-box-expanded .input-container input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    
+        .chat-box-expanded .input-container button {
+            padding: 10px 20px;
+            background-color: #ef771b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    
+        /* Subscribe to Newsletter */
+        .subscribe-section {
+            margin-top: 20px;
+            background-color: #444;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    
+        .subscribe-section input {
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    
+        .subscribe-section button {
+            padding: 10px 20px;
+            background-color: #ef771b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+    
+        .subscribe-section h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: white;
+        }
+/* General Container Styling */
+.container {
+    margin: 0 auto; /* Center align the containers */
+    padding: 20px;
+    width: 80%; /* Ensure consistent width */
+    background-color: rgba(255, 255, 255, 0.1); /* Optional styling */
+    border-radius: 8px;
+    margin-bottom: 20px; /* Adds space below each container */
+    color: black;
+    display: block; /* Ensure containers behave like blocks */
+}
+
+/* Flex Container Override */
+body {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center containers horizontally */
+    justify-content: flex-start; /* Align containers at the top */
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling for Search Section */
+.search-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.search-container input,
+.search-container select,
+.search-container button {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.events-container {
+    margin-left: 300px;
+    padding: 20px;
+    width: 50%;
+}
+
+/* Styling for Events Section */
+.events-container ul {
+    list-style-type: none;
+    margin-left: 150px;
+    padding: 0;
+}
+
+.events-container li {
+    color: black;
+    margin-bottom: 10px;
+   
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+    </style>
+    
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2><a href="{{url_for('dashboard')}}">  Chakraview </a> </h2>
+
+        <div class="profile-section">
+            <div class="profile-icon">NS</div>
+            <h4><a href={{url_for('NitiSense')}}>  NitiSense. </a></h4>
+            <p>{{name}}</p>
+            <p>FCS: {{fcs}}</p>
+        </div>
+
+      <div>  <!-- Add this to your dashboard template -->
+<a href="/dsu-chatbot" target="_blank" class="btn btn-primary">
+    Open DSU Knowledge Chat
+</a></div>
+
+        <ul>
+            <li><a href="#"><span class="icon">&#x1F4D6;</span> About</a></li>
+            <li><a href= "{{url_for('alliance_load')}}" ><span class="icon">&#x1F91D;</span> Alliances</a></li>
+            <li><a href="#"><span class="icon">&#x1F3AE;</span> Demo</a></li>
+            <li><a href="#"><span class="icon">&#x1F4C4;</span> Data Policies</a></li>
+            <li><a href="#"><span class="icon">&#x2709;</span> Contact</a></li>
+        </ul>
+
+    
+    </div>
+
+   <!-- Main Content -->
+<div class="container">
+    <form action="/events" method="POST">
+        <div class="search-container">
+            <h3>Search for Events to Grow !!!</h3>
+            <input type="text" name="event-search" placeholder="Search for events...">
+            <select name="city-select">
+                <option value="">Select City</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Jaipur">Jaipur</option>
+            </select>
+            <input type="hidden" name="name" value="{{name}}">
+            <input type="hidden" name="user_id" value="{{user_id}}">
+            <button type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="container events-container">
+    <h3>The Chakraview Solution <span class="icon">&#x1F4BB;</span></h3>
+    <p>Chakraview is more than a platform—it’s an AI-powered ecosystem designed to provide clarity, credibility, and connectivity for startups.</p>
+    
+    <h4>AI-Powered Strategic Bot: NitiSense <span class="icon">&#x1F916;</span></h4>
+    <ul>
+        <li><strong>Real-time Guidance:</strong> NitiSense identifies bottlenecks and recommends actionable next steps. <span class="icon">&#x1F4C8;</span></li>
+        <li><strong>Partnership & Funding:</strong> Suggests partnerships, exhibitions, and funding opportunities tailored to market trends and business goals. <span class="icon">&#x1F4B5;</span></li>
+        <li><strong>24/7 Clarity:</strong> Acts as a mentor, providing consistent support and strategic insight whenever needed. <span class="icon">&#x1F50D;</span></li>
+    </ul>
+
+    <h4>Founder Credit Score (FCS) <span class="icon">&#x1F4C8;</span>:</h4>
+    <ul>
+        <li><strong>A comprehensive metric:</strong> Evaluates startups on innovation, traction, and engagement. <span class="icon">&#x1F4B0;</span></li>
+        <li><strong>Builds credibility:</strong> Gives investors and partners an easy-to-understand benchmark. <span class="icon">&#x1F4A1;</span></li>
+        <li><strong>Tracks growth:</strong> Enables startups to track their growth and identify areas for improvement. <span class="icon">&#x1F4C8;</span></li>
+    </ul>
+
+    <h4>Global Startup Meetups and Exhibitions <span class="icon">&#x1F4C6;</span>:</h4>
+    <ul>
+        <li><strong>Curated events:</strong> For startups to showcase their innovations to global audiences. <span class="icon">&#x1F4F1;</span></li>
+        <li><strong>Networking opportunities:</strong> Face-to-face networking with investors, manufacturers, and industry leaders. <span class="icon">&#x1F91D;</span></li>
+        <li><strong>Participation in global summits:</strong> Enables startups to gain visibility and mentorship. <span class="icon">&#x1F4C8;</span></li>
+    </ul>
+</div>
+
+
+    
+   <!-- Chat Box -->
+   <div class="chat-box-container" onclick="toggleChatBox()">
+    <span>Chat with NitiSense</span>
+    <div class="chat-icon">N</div>
+</div>
+
+<div class="chat-box-expanded" id="chat-box-expanded">
+    <button onclick="closeChatBox()" style="align-self: flex-end; background-color: #f44336; color: white;">X</button>
+    <h4>NitiSense</h4>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="input-container">
+        <input type="text" id="user-input" placeholder="Ask something...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    // Function to toggle the chat box visibility
+    function toggleChatBox() {
+        const chatBox = document.getElementById("chat-box-expanded");
+        // Toggle the 'active' class to show/hide the chat box
+        chatBox.classList.toggle("active");
+    }
+
+    // Function to expand the chat box and load a welcome message
+    function expandChatbox() {
+        const chatbox = document.getElementById("chat-box-expanded");
+        chatbox.classList.add("active");
+
+        // Send request to server to fetch welcome message
+        fetch('/expand-chatbox', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'user_id={{user_id}}'  // Assuming the user_id is available in the template
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Show the welcome message
+            const chatBox = document.getElementById("chat-box");
+            const message = document.createElement("div");
+            message.classList.add('bot-message');
+            message.textContent = data.welcome_message;
+            chatBox.appendChild(message);
+        });
+    }
+
+    // Function to send a message
+    function sendMessage() {
+        const userInput = document.getElementById('user-input').value;
+        if (userInput) {
+            const chatBox = document.getElementById('chat-box');
+            const message = document.createElement('div');
+            message.classList.add('user-message');
+            message.textContent = userInput;
+            chatBox.appendChild(message);
+
+            // Send the message to the server
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'user_id={{user_id}}&message=' + encodeURIComponent(userInput)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display bot response
+                const botMessage = document.createElement('div');
+                botMessage.classList.add('bot-message');
+                botMessage.textContent = data.response;
+                chatBox.appendChild(botMessage);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
